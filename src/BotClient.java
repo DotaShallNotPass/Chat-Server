@@ -4,7 +4,6 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BotClient extends Client {
     @Override
@@ -37,40 +36,31 @@ public class BotClient extends Client {
         protected void processIncomingMessage(String message) {
             String userNameDelimiter = ": ";
             String[] split = message.split(userNameDelimiter);
+            String userName = split[0];
             if (split.length != 2) return;
+            File photos = new File("photos");
+            if (!photos.exists()) {
+                photos.mkdir();
+            }
+            File usersDir = new File("photos\\" + userName + " photos");
+            if (!usersDir.exists()) {
+                usersDir.mkdir();
+            }
 
             String messageWithoutUserName = split[1];
-            String userName = split[0];
 
-            String base64 = "";
-            int counter = 0;
-            if(messageWithoutUserName.length() > 50)
-            {
-                base64 += message;
-                counter++;
-                System.out.println("base64+= | counter == "+counter);
+            if (messageWithoutUserName.length() > 100) {
+                byte[] decocByteArray = Base64.getDecoder().decode(messageWithoutUserName);
+                BufferedImage image;
+                ByteArrayInputStream bais = new ByteArrayInputStream(decocByteArray);
+                try{
+                    image = ImageIO.read(bais);
+                    File result = new File("photos\\"+userName+" photos\\"+Math.random()*99999999+".jpeg");
+                    ImageIO.write(image, "jpeg",result);
+                }catch (Exception e){
+
+                }
             }
         }
     }
 }
-/*
-if (counter +1 >= 2)
-                {
-                    System.out.println("count >= 2");
-                    Base64.Decoder b64 = Base64.getDecoder();
-                    byte[] decodedByteArray = b64.decode(base64);
-                    BufferedImage image;
-                    ByteArrayInputStream bis = new ByteArrayInputStream(decodedByteArray);
-                    System.out.println("before try");
-                    try {
-                        image = ImageIO.read(bis);
-                        File outputfile = new File("image.jpeg");
-                        System.out.println("before imageio");
-                        ImageIO.write(image, "jpeg", outputfile);
-                    } catch (IOException e) {
-                        throw new RuntimeException();
-                    }
-                    base64 = "";
-                    counter = 0;
-                }
- */

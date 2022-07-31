@@ -93,7 +93,7 @@ public class Server {
         public void run(){
             String userName = null;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-//            ConsoleHelper.writeMessage(String.format("["+LocalTime.now().format(dtf)+"] Connection from %s",socket.getRemoteSocketAddress().toString().split("/")[1].toString().split("/")[1]));
+            ConsoleHelper.writeMessage(String.format("["+LocalTime.now().format(dtf)+"] Connection from %s",socket.getRemoteSocketAddress().toString().split("/")[1].toString().split("/")[1]));
             try(Connection connection = new Connection(socket)){
                 userName = serverHandshake(connection);
                 sendBroadcastMessage(new Message(MessageType.USER_ADDED,userName));

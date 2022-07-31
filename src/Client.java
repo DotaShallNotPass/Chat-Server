@@ -7,13 +7,15 @@ public class Client {
     private volatile boolean clientConnected;
 
     protected String getServerAddress() {
-        ConsoleHelper.writeMessage("Enter server's address:");
-        return ConsoleHelper.readString();
+//        ConsoleHelper.writeMessage("Enter server's address:");
+//        return ConsoleHelper.readString();
+        return "localhost";
     }
 
     protected int getServerPort() {
-        ConsoleHelper.writeMessage("Enter server's port:");
-        return ConsoleHelper.readInt();
+//        ConsoleHelper.writeMessage("Enter server's port:");
+//        return ConsoleHelper.readInt();
+        return 6679;
     }
 
     protected String getUserName() {
@@ -123,12 +125,12 @@ public class Client {
             ConsoleHelper.writeMessage("An error occurred while the client was running.");
 
         while (clientConnected) {
-            String text = ConsoleHelper.readString();
-            if (text.equalsIgnoreCase("exit"))
-                break;
+//            String text = ConsoleHelper.readString();
+//            if (text.equalsIgnoreCase("exit"))
+//                break;
 
-            if (shouldSendTextFromConsole())
-                sendTextMessage(text);
+//            if (shouldSendTextFromConsole())
+//                sendTextMessage(text);
         }
     }
 
