@@ -50,15 +50,15 @@ public class BotClient extends Client {
             String messageWithoutUserName = split[1];
 
             if (messageWithoutUserName.length() > 100) {
-                byte[] decocByteArray = Base64.getDecoder().decode(messageWithoutUserName);
+                byte[] byteArr = Base64.getDecoder().decode(messageWithoutUserName);
                 BufferedImage image;
-                ByteArrayInputStream bais = new ByteArrayInputStream(decocByteArray);
+                ByteArrayInputStream bais = new ByteArrayInputStream(byteArr);
                 try{
                     image = ImageIO.read(bais);
                     File result = new File("photos\\"+userName+" photos\\"+Math.random()*99999999+".jpeg");
                     ImageIO.write(image, "jpeg",result);
                 }catch (Exception e){
-
+                sendTextMessage("fatal: not a command");
                 }
             }
         }
