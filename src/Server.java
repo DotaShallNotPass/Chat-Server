@@ -40,7 +40,7 @@ public class Server {
             }
         }
     }
-    private static class Handler extends Thread{
+    public static class Handler extends Thread{
     private Socket socket;
     Handler(Socket socket){
         this.socket = socket;
@@ -59,12 +59,12 @@ public class Server {
                 String userName = message.getData();
 
                 if (userName.isEmpty()) {
-                    ConsoleHelper.writeMessage("Attempted to connect to a server with an empty name from " + socket.getRemoteSocketAddress());
+                    ConsoleHelper.writeMessage("Attempted to connect to a server with an empty name from " + socket.getRemoteSocketAddress().toString().split("/")[1]);
                     continue;
                 }
 
                 if (connectionMap.containsKey(userName)) {
-                    ConsoleHelper.writeMessage("An attempt was made to connect to a server with a name already in use from " + socket.getRemoteSocketAddress());
+                    ConsoleHelper.writeMessage("An attempt was made to connect to a server with a name already in use from " + socket.getRemoteSocketAddress().toString().split("/")[1]);
                     continue;
                 }
                 connectionMap.put(userName, connection);
@@ -86,14 +86,14 @@ public class Server {
                     String data = message.getData();
                     sendBroadcastMessage(new Message(MessageType.TEXT, userName + ": " + data));
                 } else {
-                    ConsoleHelper.writeMessage("Received new message from " + socket.getRemoteSocketAddress().toString().split("/")[1].toString().split("/")[1] + ". Тип сообщения не соответствует протоколу.");
+                    ConsoleHelper.writeMessage("Received new message from " + socket.getRemoteSocketAddress().toString().split("/")[1] + ". Тип сообщения не соответствует протоколу.");
                 }
             }
         }
         public void run(){
             String userName = null;
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-            ConsoleHelper.writeMessage(String.format("["+LocalTime.now().format(dtf)+"] Connection from %s",socket.getRemoteSocketAddress().toString().split("/")[1].toString().split("/")[1]));
+            ConsoleHelper.writeMessage(String.format("["+LocalTime.now().format(dtf)+"] Connection from %s",socket.getRemoteSocketAddress().toString().split("/")[1]));
             try(Connection connection = new Connection(socket)){
                 userName = serverHandshake(connection);
                 sendBroadcastMessage(new Message(MessageType.USER_ADDED,userName));
