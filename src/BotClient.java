@@ -49,7 +49,7 @@ public class BotClient extends Client {
 
             String messageWithoutUserName = split[1];
 
-            if (messageWithoutUserName.length() > 100) {
+            if (messageWithoutUserName.length() > 700) {
                 byte[] byteArr = Base64.getDecoder().decode(messageWithoutUserName);
                 BufferedImage image;
                 ByteArrayInputStream bais = new ByteArrayInputStream(byteArr);

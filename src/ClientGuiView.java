@@ -16,7 +16,7 @@ import javax.swing.text.JTextComponent;
 public class ClientGuiView {
     private final ClientGuiController controller;
 
-    private JFrame frame = new JFrame("С подключением!))");
+    private JFrame frame = new JFrame("Кто в доту?!))");
     private JTextField textField = new JTextField(50);
     private JTextArea messages = new JTextArea(10, 50);
     private JTextArea users = new JTextArea(10, 13);
@@ -272,12 +272,3 @@ class SmartScroller implements AdjustmentListener
         previousMaximum = maximum;
     }
 }
-
-
-
-
-
-
-
-
-
