@@ -4,11 +4,13 @@ import java.net.ServerSocket;
 
 public class OneClassToRuleThemAll {
     public static void main(String[] args) throws Exception {
-    new Starter1().start();
-    new Starter2().start();
-    new Starter3().start();
+        new Starter3().run();
+        Thread.sleep(1000);
+        new Starter1().run();
+        new Starter2().run();
+
     }
-    private static class Starter1 extends Thread{
+    private static class Starter1 implements Runnable{
 
         @Override
         public void run() {
@@ -25,7 +27,7 @@ public class OneClassToRuleThemAll {
             }
         }
     }
-    private static class Starter2 extends Thread{
+    private static class Starter2 implements Runnable{
 
         @Override
         public void run() {
@@ -34,8 +36,7 @@ public class OneClassToRuleThemAll {
             client.run();
         }
     }
-    private static class Starter3 extends Thread {
-
+    private static class Starter3 implements Runnable {
         @Override
         public void run() {
             ClientGuiController clientGUI = new ClientGuiController();

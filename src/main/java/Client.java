@@ -1,4 +1,3 @@
-
 import java.io.IOException;
 import java.net.Socket;
 
@@ -125,12 +124,6 @@ public class Client {
             ConsoleHelper.writeMessage("An error occurred while the client was running.");
 
         while (clientConnected) {
-//            String text = ConsoleHelper.readString();
-//            if (text.equalsIgnoreCase("exit"))
-//                break;
-
-//            if (shouldSendTextFromConsole())
-//                sendTextMessage(text);
         }
     }
 

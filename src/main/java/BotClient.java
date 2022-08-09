@@ -18,7 +18,7 @@ public class BotClient extends Client {
 
     @Override
     protected String getUserName() {
-        return "Декодировщик";
+        return "Decoder Bot";
     }
 
     public static void main(String[] args) {
